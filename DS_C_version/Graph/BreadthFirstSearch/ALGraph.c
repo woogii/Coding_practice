@@ -67,10 +67,5 @@ void ShowGraphEdgeInfo(ALGraph* pg)
 		}
 		printf("\n");
 	}
-}
-
-void DFShowGraphVertex(ALGraph* pg, int startV)
-{
-	
 
 }
