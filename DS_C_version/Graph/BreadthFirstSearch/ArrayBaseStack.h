@@ -18,7 +18,7 @@ typedef ArrayStack Stack;
 void StackInit(Stack* pstack);			// Stack initialization
 int SIsEmpty(Stack* pstack);			// Check stack whether it is empty 
 void SPush(Stack* pstack, Data data);   // Stack push operation 
-void SPop(Stack* pstack);				// Stack pop operation
+Data SPop(Stack* pstack);				// Stack pop operation
 Data SPeek(Stack* pstack);				// Peek operation
 
 #endif 

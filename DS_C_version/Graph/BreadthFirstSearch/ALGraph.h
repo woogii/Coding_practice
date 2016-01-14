@@ -11,6 +11,7 @@ typedef struct _ual {
 	int numOfVertex;
 	int numOfEdge;
 	List* adjList;
+	int* visitInfo;
 
 } ALGraph;
 
@@ -26,4 +27,7 @@ void AddEdge(ALGraph* pg, int fromV, int toV);
 // Print the information of the vertex 
 void ShowGraphEdgeInfo(ALGraph* pg);
 
+// DFS search
+void DFShowGraphVertex(ALGraph* pg, int startV);
+     
 #endif 
