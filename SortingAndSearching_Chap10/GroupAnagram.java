@@ -3,41 +3,52 @@ package chapter10;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+
+
 
 public class GroupAnagram {
-
 	
 	public static void main(String[] args) {
 		
-		ArrayList<String> strArray = new ArrayList<String>();
-		
-		strArray.add("dog");
-		strArray.add("abc");
-		
-		strArray.add("xyz");
-		strArray.add("bcd");
-		
-		strArray.add("god");
-		
-		strArray.add("cba");
-		strArray.add("zyx");
+		String[] strArray = {"dog", "abc", "xyz", "bcd","god", "cba","zyx"};
 		
 		findAnagram(strArray);
 	
 	}
 	
-	public static void findAnagram(ArrayList<String> strArray)  {
+	public static void findAnagram(String[] strArray)  {
 		
-		HashMap<String,String> hashMap = new HashMap<String,String>();
+		HashMap<String,ArrayList<String>> hashMap = new HashMap<String,ArrayList<String>>();
+		ArrayList<String> strList = new ArrayList<String>();
 		
 		for (String str : strArray ){
-			hashMap.put(sort(str), str);
+			String key = sort(str);
+			
+			if(!hashMap.containsKey(key)) {
+				hashMap.put(key, new ArrayList<String>());
+			}
+			hashMap.get(key).add(str);
 		}
 		
-		System.out.println(hashMap);
+		for(Map.Entry<String, ArrayList<String>> entry: hashMap.entrySet()) {
+			strList.addAll(entry.getValue());
+		}
 		
-		for(int i = 0; i< strArray.size(); i++) {
-			System.out.println(strArray.get(i));
+		strArray = strList.toArray(strArray);
+		
+//		int index = 0;
+//		for (String key : hashMap.keySet()) {
+//			ArrayList<String> list = hashMap.get(key);
+//			for(String s: list){
+//				strArray[index] = s;
+//				index++;
+//			}
+//		}
+//		
+		for(int i = 0; i< strArray.length; i++){
+			System.out.println(strArray[i]);
 		}
 	}
 	
