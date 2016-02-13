@@ -25,6 +25,7 @@ void MergeSort(int arr[], int left, int right)
 void MergeTwoArea(int arr[], int left, int mid, int right) 
 {
 	int length = right+1;
+	printf("length : %d\n", length);
 
 	int* sorted_arr = (int *)malloc(sizeof(int)*length);
 	int newArrIdx = left;
@@ -71,7 +72,8 @@ void MergeTwoArea(int arr[], int left, int mid, int right)
 	
 int main() 
 {
-	int arr[] = {15,19,1,45,34,18,30,20};
+	//int arr[] = {15,19,1,45,34,18,30,20};
+	int arr[] = {3,2,4,1,7,6,5};
 	int i = 0;
 
 	MergeSort(arr,0, sizeof(arr)/sizeof(int) - 1);
