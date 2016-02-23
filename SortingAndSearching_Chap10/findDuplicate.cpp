@@ -2,6 +2,15 @@
 #include <iostream>
 #include <vector>
 
+// This problem is all about bit manipulation. 
+// Should understand how 'SHIFT' and 'AND' operations are used in this program.
+// First, creates a bit vector with 32000 bits, where each bit represents one integer.
+// We declare integer(=4byte) array with 1000 elements of data, which can be thought as if we secure the space where we can store 32000 bits information in the array.
+// From the given input data, it is divided by 32, which is equivalent of '>> 5' operation, to locate which array index the data exits on. 
+// Then, do additional bit wise operation within single 'word'(= 4 bytes) to flag each element by setting a bit to 1.
+
+// & 0x1F == mod 32,    ex)  00100001 (=33) & 00011111 = 1, 00100000 (=32) & 00011111 = 0 , 00000001 & 00011111  = 1 
+
 class BitSet 
 {
 	public : 
@@ -23,19 +32,19 @@ class BitSet
 			std::cout << "bitNumber  : " << bitNumber << std::endl;
 			std::cout << "1 << bitNumber  : " << (1<<bitNumber) << std::endl;
 
-			return (bitArray[wordNumber] & (1 << bitNumber)) != 0;
+			return (bitArray[wordNumber] & (1 << bitNumber));				
 		}
 
 		void set(int pos)
 		{
-			int wordNumber = (pos >> 5);
-			int bitNumber = (pos & 0x1F);
+			int wordNumber = (pos >> 5);			// divide 32 
+			int bitNumber = (pos & 0x1F);			// mod 32 
 
 			std::cout << "in set..." << std::endl;
 			std::cout << "wordNumber : " << wordNumber << std::endl;
 			std::cout << "bitNumber  : " << bitNumber << std::endl;
 
-			bitArray[wordNumber] |= 1 << bitNumber;
+			bitArray[wordNumber] |= 1 << bitNumber;					// flag each element by setting to 1 
 		}
 
 };
@@ -54,7 +63,7 @@ void checkDuplicates(int arr[], int size)
 
 		if(bs->get(num0)) 
 		{
-			std::cout << num << std::endl;
+			std::cout << "Duplicate : " <<  num << std::endl;
 		}
 		else 
 		{
