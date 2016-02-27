@@ -30,12 +30,14 @@ bool checkOneEdit(std::string& str1, std::string& str2)
 	{
 		result = checkReplace(str1, str2);
 	}
-	else if( str1.compare(str2) < 0)
+	else if( str1.length() > str1.length() )
 	{
+		printf("str1 is shorter\n");
 		result = checkInsert(str1, str2);
 	}
 	else 
 	{
+		printf("str1 is longer\n");
 		result = checkInsert(str2, str1);
 	}	
 
@@ -44,11 +46,26 @@ bool checkOneEdit(std::string& str1, std::string& str2)
 
 bool checkInsert(std::string& str1, std::string& str2)
 {
-	for(int i = 0; i < str1.size(); i++)
+	int index1 = 0;
+	int index2 = 0;
+
+	while(index2 < str2.length() && index1 < str1.length() ) 
 	{
-		if(str1[i]!=str2[i])
-			return false;
+		if( str1[index1] != str2[index2])
+		{
+			if(index1 != index2)
+			{
+				return false;
+			}
+			index2++;
+		}
+		else 
+		{
+			index1++;
+			index2++;
+		}
 	}
+
 	return true;
 }
 
