@@ -9,9 +9,7 @@ bool checkInsert(std::string& str1, std::string& str2);
 int main()
 {
 	std::string str1 = "pale";
-	std::string str2 = "ple";
-
-	std::string str3 = "pales";
+	std::string str2 = "pl";
 
 	if(checkOneEdit(str1, str2))
 		std::cout << "there is only one edit away" << std::endl;
@@ -30,18 +28,18 @@ bool checkOneEdit(std::string& str1, std::string& str2)
 	{
 		result = checkReplace(str1, str2);
 	}
-	else if( str1.length() > str1.length() )
+	else if( str1.length() +1 ==  str2.length() )
 	{
 		printf("str1 is shorter\n");
 		result = checkInsert(str1, str2);
 	}
-	else 
+	else if( str1.length() -1 == str2.length() )
 	{
 		printf("str1 is longer\n");
 		result = checkInsert(str2, str1);
 	}	
 
-	return result;
+	return false;
 }
 
 bool checkInsert(std::string& str1, std::string& str2)
@@ -74,16 +72,26 @@ bool checkReplace(std::string& str1, std::string& str2)
 {
 	int numOfEdit = 0;
 
-	sort(str1.begin(), str1.end());
-	sort(str2.begin(), str2.end());
+	//sort(str1.begin(), str1.end());
+	//sort(str2.begin(), str2.end());
+	bool foundDifference = false;
 
 	for(int i = 0; i<str1.size(); i++)
 	{
+
 		if(str1[i] != str2[i])
 		{
-			numOfEdit++;
+			// 	numOfEdit++;
+			if(foundDifference) 
+			{
+				return false;
+			}
+			
+			foundDifference = true;
 		}
 	}
-	std::cout << "num of edit : " << numOfEdit << std::endl;
-	return numOfEdit == 1;
+	// std::cout << "num of edit : " << numOfEdit << std::endl;
+	
+	return foundDifference;
+	// return numOfEdit == 1;
 }
