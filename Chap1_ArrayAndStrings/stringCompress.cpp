@@ -15,8 +15,8 @@ int main()
 	return 0;
 }
 
-#if 0 
-std::string compressedStr(std::string str)
+#if 1
+std::string compress(std::string& str)
 {
 	std::string compressedStr;
 	int countConsecutive = 0;
@@ -26,17 +26,17 @@ std::string compressedStr(std::string str)
 		countConsecutive++;
 
 		if( i+1 >= str.length() || str[i] != str[i+1] ) {
-			compressedStr +=  std::string(" ") + std::string(str[i]) + std::to_string(countConsecutive);
+			compressedStr +=  std::string(1,str[i]) + std::to_string(countConsecutive);
+			std::cout << compressedStr << std::endl;
 			countConsecutive = 0;
 		}
-
 	}
 	return compressedStr.length() < str.length() ? compressedStr : str;
 
 }
 #endif 
 
-#if 1
+#if 0
 
 std::string compress(std::string& str)
 {
