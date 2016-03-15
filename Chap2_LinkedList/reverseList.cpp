@@ -1,11 +1,8 @@
-
 #include <iostream>
 
-typedef struct _node 
-{
+typedef struct _node {
 	int data;
 	struct _node* next;
-
 } Node;
 
 void insert(Node** head, int value)
@@ -51,6 +48,23 @@ void reverse(Node** head)
 	
 }
 
+Node* reverse_recursion(Node** node)
+{
+	Node* curr = *(node);
+	Node* newHead;
+
+	if( curr->next == NULL ) 
+	{
+		newHead = curr;
+		return curr; 
+	}
+
+	newHead = reverse_recursion(&(curr->next));
+
+    curr->next->next = curr;
+    curr->next = NULL;
+    return newHead;
+}
 
 int main()
 {
@@ -66,7 +80,7 @@ int main()
 	reverse(&head);
 	print(&head);
 
-	reverse(&head);
+	head = reverse_recursion(&head);
 	print(&head);
 
 
