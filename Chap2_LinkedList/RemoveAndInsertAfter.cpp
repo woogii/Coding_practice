@@ -1,8 +1,7 @@
 //
 //  main.cpp
-//  LinkedListStack
+//  Stack_LinkedList
 //
-//  Created by TeamSlogup on 2016. 10. 29..
 //  Copyright © 2016년 siwookhyun. All rights reserved.
 //
 
@@ -165,106 +164,89 @@ struct LinkedList {
     
     bool insertAfter(Element* element, int data) {
         
-        if (element == NULL) {
-            
-            head = (Element*)malloc(sizeof(Element));
-            tail = head;
-            head->data = data;
-            head->next = NULL;
-            return true;
-            
+        Element* newElement;
+        Element* currentPosition = head;
+        
+        newElement = (Element*)malloc(sizeof(Element));
+        
+        // Checek whether the dynamic memory allocation is performed properly
+        if (!newElement) {
+            return false;
         }
-//        else if (element == head) {
-//                
-//            Element* newElement = (Element*)malloc(sizeof(Element));
-//            newElement->data = data;
-//            newElement->next = NULL;
-//            head->next = newElement;
-//            
-//            return true;
-//            
-//        }
-        else if (element == tail) {
-            
-            Element* newElement = (Element*)malloc(sizeof(Element));
-            newElement->data = data;
-            newElement->next = NULL;
-            tail->next = newElement;
-            tail = newElement;
+        newElement->data = data;
         
-            return true;
+        // Insert at the beginning of the list
+        if (!element) {
             
-        } else {
-        
-            Element* newElement = (Element*)malloc(sizeof(Element));
-            newElement->data = data;
-            newElement->next = element->next;
-            element->next = newElement;
+            newElement->next = head;
+            head = newElement;
+            
+            // In case the list is an empty
+            if (!tail ){
+                tail = newElement;
+            }
+            
             return true;
         }
+        
+        
+        while(currentPosition) {
+        
+            if( currentPosition == element ){
+
+                newElement->next = currentPosition->next;
+                currentPosition->next = newElement;
+                
+                if (currentPosition == tail) {
+                    tail = newElement;
+                }
+                return true;
+            }
+            currentPosition = currentPosition->next;
+        }
+        
+        // Couldn't location a position where newElement is inserted
+        free(newElement);
+        return false;
         
     }
     
     bool remove(Element* element) {
     
-        if (element == NULL) {
+        Element *currentPosition = head;
         
+        if( !element ) {
             return false;
-            
-        } else if (element == head) {
-        
-            if (head != tail) {
-                Element* headNext = head->next;
-                free(element);
-                head = headNext;
-            } else {
-                free(element);
-                head = NULL;
-                tail = NULL;
-            }
-            
-            return true;
-            
-        } else if (element == tail) {
-        
-            if (head != tail) {
-                
-                Element* prevTail = (Element*)malloc(sizeof(Element));
-                prevTail = head;
-                
-                while(prevTail->next == tail ) {
-                    prevTail = prevTail->next;
-                }
-                
-                prevTail->next = NULL;
-                free(tail);
-                tail = prevTail;
-                
-            } else {
-                free(element);
-                head = NULL;
-                tail = NULL;
-            }
-            
-            return true;
-            
-        } else {
-            
-            Element* prevElement = (Element*)malloc(sizeof(Element));
-            prevElement = head;
-            
-            while(prevElement->next == element ) {
-                prevElement = prevElement->next;
-            }
-            
-            prevElement->next = element->next;
-            free(element);
-
-            return true;
-            
         }
         
+        if (element == head) {
+            
+            head = element->next;
+            free(element);
+            
+            // if there is only one element in the list
+            if(!head)
+                tail = NULL;
         
+            return true;
+        }
+    
+        while( currentPosition ) {
+            
+            if (currentPosition->next == element) {
+                
+                currentPosition->next = element->next;
+                free(element);
+                if(currentPosition->next == NULL)
+                    tail = currentPosition;
+                return true;
+            }
+            
+            currentPosition = currentPosition->next;
+        }
+        
+                
+        return false;
     }
     
     void printAllElementsInList() {
@@ -292,6 +274,8 @@ int main(int argc, const char * argv[]) {
     list.insertAfter(list.tail, 4);
     list.insertAfter(list.head->next, 3);
     
+    //list.remove(list.head);
+    list.remove(list.tail);
     list.printAllElementsInList();
     
 #if 0
