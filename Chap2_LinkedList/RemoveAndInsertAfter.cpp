@@ -253,6 +253,10 @@ struct LinkedList {
         
         Element* current = head;
         
+        if (current == NULL) {
+            printf("No data is the list");
+        }
+        
         while(current != NULL) {
             printf("%d ", current->data);
             current = current->next;
@@ -260,6 +264,28 @@ struct LinkedList {
         
         printf("\n");
     }
+    
+    void removeHead(Element** head) {
+        
+        // if list is an empty
+        
+        if ( head && *head) {
+            Element* temp = (*head)->next;
+            free(*head);
+            (*head) = temp;
+        }
+        
+    }
+    
+//    void removeHead(Element* head) {
+//        printf("%p\n", (void*)head);
+//        if (head == NULL ) {
+//            printf("head point to NULL");
+//            return;
+//        }
+//        free(head);
+//        head = head->next;
+//    }
 };
 
 
@@ -269,15 +295,18 @@ int main(int argc, const char * argv[]) {
  
     LinkedList list;
     
-    list.insertAfter(NULL, 1);
-    list.insertAfter(list.head, 2);
-    list.insertAfter(list.tail, 4);
-    list.insertAfter(list.head->next, 3);
+    //list.insertAfter(NULL, 1);
+    //list.insertAfter(list.head, 2);
+    //list.insertAfter(list.tail, 4);
+    //list.insertAfter(list.head->next, 3);
     
     //list.remove(list.head);
-    list.remove(list.tail);
+    //list.remove(list.tail);
+    //
+    // printf("%p\n", (void*)list.head);
+    list.removeHead(NULL);
+    list.removeHead(&list.head);
     list.printAllElementsInList();
-    
 #if 0
 
     Stack stack;
