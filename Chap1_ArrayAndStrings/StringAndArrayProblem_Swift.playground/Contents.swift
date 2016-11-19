@@ -6,7 +6,7 @@ var str = "HelloPlayground"
 print(str)
 
 extension Character {
-
+    
     func unicodeScalarCodePoint()->UInt32 {
         let characterString = String(self)
         let scalars = characterString.unicodeScalars
@@ -16,20 +16,38 @@ extension Character {
 
 var dict = [Character:Int]()
 var orderedDict = [Int:[Character:Int]]()
-var i = 1
+var i = 0
+var length = 0
 
-for char in str.lowercased().characters {
+
+func firstNonRepeated(str: String)-> Character? {
     
-    if dict[char] == nil {
-        dict[char] = 1
+    for i in 0..<str.characters.count {
         
-    } else {
-        dict[char] = Int(dict[char]!) + 1
+        let index = str.index(str.startIndex, offsetBy: i)
+        
+        if dict[str[index]] != nil {
+            dict[str[index]] = dict[str[index]]! + 1
+        } else {
+            dict[str[index]] = 1
+        }
+        
+        
     }
-    orderedDict[i] = dict
-    i = i + 1
+    
+    for i in 0..<str.characters.count {
+        
+        let index = str.index(str.startIndex, offsetBy:i)
+        let ch = str[index]
+        
+        if dict[ch] == 1{
+            print(ch)
+            return ch
+        }
+    
+    }
+    
+    return nil 
 }
 
-for (key, value) in orderedDict {
-    print("key, value : \(key), \(value)")
-}
+print(firstNonRepeated(str: str))
