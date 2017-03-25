@@ -5,6 +5,10 @@ import UIKit
 
 var dict = Dictionary<Character,Int>()
 var myDictionary: [Int: [Character: Int]] = [0:[:], 1:[:],2:[:],3:[:], 4:[:]]
+var orderedDict = Dictionary<Character,Int>()
+var myDictionary: [Int: [Character: Int]] = [:]
+
+//let characterList = ["P","Q","R","S","T","P","R","A","T","B","C","P","P","P","P","P","C","P","P","J"]
 
 extension Character
 {
@@ -17,10 +21,16 @@ extension Character
   }
 }
 
-var test = "total"
+extension String {
+  
+  func indexAt(index:Int)->Character {
+    return self[self.index(self.startIndex, offsetBy:index)]
+  }
+}
 
-for i in 0..<test.characters.count {
-  //print(char)
+var testString = "total"
+
+for i in 0..<testString.characters.count {
   
   if var dict = myDictionary[i] {
     
@@ -33,8 +43,27 @@ for i in 0..<test.characters.count {
     }
     
   }
+
+  let char = testString.indexAt(index:i)
+  dict[char] = (dict[char] ?? 0) + 1
+  
+  myDictionary[i] = [char:(dict[char] ?? 0)]
+
+}
+
+let sortedDict = myDictionary.sorted(by:{ $0.0 < $1.0 })
+
+for i in 0..<testString.characters.count {
+  
+  let char = testString.indexAt(index:i)
+
+  print(sortedDict[i].value[char] ?? 0)
+  if (sortedDict[i].value[char] ?? 0) > 1 {
+    print("char : \(char)")
+  }
   
 }
 
-print(dict)
+//let characters = ["P","Q","R","S","T","P","R","A","T","B","C","P","P","P","P","P","C","P","P","J"]
+
 
