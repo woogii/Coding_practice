@@ -4,7 +4,7 @@ import UIKit
 
 
 var dict = Dictionary<Character,Int>()
-var myDictionary: [Int: [Character: Int]] = [:]
+var myDictionary: [Int: [Character: Int]] = [0:[:], 1:[:],2:[:],3:[:], 4:[:]]
 
 extension Character
 {
@@ -22,7 +22,7 @@ var test = "total"
 for i in 0..<test.characters.count {
   //print(char)
   
-    var dict = myDictionary[i] as! [Character:Int]
+  if var dict = myDictionary[i] {
     
     if dict.contains(where: {return $0.key == test[test.index(test.startIndex, offsetBy: i)] }) {
       if let value = dict[test[test.index(test.startIndex, offsetBy: i)]] {
@@ -31,6 +31,8 @@ for i in 0..<test.characters.count {
     } else {
       dict[test[test.index(test.startIndex, offsetBy: i)]] = 1
     }
+    
+  }
   
 }
 
