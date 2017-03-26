@@ -19,8 +19,8 @@ func mergeSort<T:Comparable>(_ array: [T])->[T] {
 
 func merge<T:Comparable>(_ left:[T], _ right:[T]) -> [T] {
   
-  print(left)
-  print(right)
+  print("left: \(left)")
+  print("right: \(right)")
   var leftIndex = 0
   var rightIndex = 0
   
