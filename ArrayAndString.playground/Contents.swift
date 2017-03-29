@@ -6,7 +6,7 @@ import UIKit
 var dict = Dictionary<Character,Int>()
 var myDictionary: [Int: [Character: Int]] = [0:[:], 1:[:],2:[:],3:[:], 4:[:]]
 var orderedDict = Dictionary<Character,Int>()
-var myDictionary: [Int: [Character: Int]] = [:]
+//var myDictionary: [Int: [Character: Int]] = [:]
 
 extension Character
 {
@@ -50,12 +50,12 @@ for i in 0..<testString.characters.count {
   
   if var dict = myDictionary[i] {
     
-    if dict.contains(where: {return $0.key == test[test.index(test.startIndex, offsetBy: i)] }) {
-      if let value = dict[test[test.index(test.startIndex, offsetBy: i)]] {
-        dict[test[test.index(test.startIndex, offsetBy: i)]] = value + 1
+    if dict.contains(where: {return $0.key == testString[testString.index(testString.startIndex, offsetBy: i)] }) {
+      if let value = dict[testString.indexAt(index: i)] {
+        dict[testString.indexAt(index: i)] = value + 1
       }
     } else {
-      dict[test[test.index(test.startIndex, offsetBy: i)]] = 1
+      dict[testString[testString.index(testString.startIndex, offsetBy: i)]] = 1
     }
     
   }
@@ -210,3 +210,120 @@ print(stringToInt(numberString: "1235"))
 print(stringToInt(numberString: "-145"))
 
 
+//Given an array, find there are 3 numbers have
+//
+//when we add them the value will equals a specified sum
+//Example:
+//{1,4,6,10,20,21}
+//Sum=32, Result:true (1+10+21)
+//Sum=65, Result:false
+
+// Standard questions on array traversal to find maximum subsequence sum, 3 sum, etc.
+
+
+func findCombinationOfNumberList(sum:Int)->[Int]{
+  
+  let arr = [1,4,6,10,20,21]
+  var dict = Dictionary<Int,Bool>()
+  var secondDiff = 0
+  var firstDiff = 0
+  var partialSum = [Int]()
+  
+  for element in arr {
+    dict[element] = true
+  }
+  
+  for i in 0..<arr.count {
+
+    firstDiff = sum - arr[i]
+
+    partialSum.append(arr[i])
+    
+    for j in 0..<arr.count {
+      
+      if j != i {
+        
+        secondDiff = firstDiff - arr[j]
+        partialSum.append(arr[j])
+        
+        // Prevent possible duplicate ex) Given total is 10 and 4,6 are chosen, 14 - 10 = 4 can be selected again
+        if partialSum.contains(secondDiff) {
+          partialSum.removeLast()
+          continue
+        }
+        
+        if let _ = dict[secondDiff] {
+          partialSum.append(secondDiff)
+          return partialSum
+        } else {
+          partialSum.removeLast()
+          continue
+        }
+      }
+    }
+    
+    partialSum = []
+    secondDiff = 0
+  
+  }
+  
+  return [Int]()
+}
+
+print(findCombinationOfNumberList(sum: 36))
+
+
+//Create function that will determine are the parenthesis balanced in a given string
+//boolean isBalanced(string)
+//
+//a(bcd)d => true
+//(kjds(hfkj)sdhf => false
+//(sfdsf)(fsfsf => false
+//
+//{[]}() => true
+//{[}] => false
+//
+//2.
+//Sort the content of the a file based on second field, e.g.
+//
+//Input file:
+//Jervie,12,M
+//Jaimy,11,F
+//Tony,23,M
+//Janey,11,F
+//
+//Output file:
+//Jaimy,11,F
+//Janey,11,F
+//Jervie,12,M
+//Tony,23,M
+//don’t worry about open file, close file etc
+
+let array = ["Jervie,12,M", "Jaimy,11,F", "Tony,23,M", "Janey,11,F"]
+var intStringArrayPairDict = [String:Int]()
+
+for i in 0..<array.count {
+
+  intStringArrayPairDict[array[i]] = Int(array[i].components(separatedBy: ",")[1])
+}
+
+print(intStringArrayPairDict)
+
+for arr in intStringArrayPairDict.sorted(by:<).map({$0.key}) {
+  print("\(arr)")
+}
+
+//print(intStringArrayPairDict.sorted(by:<).map({$0.key}))
+
+
+
+
+
+
+//Given a integer , return corresponding ASCII char representation without using language building in feature.
+//
+//ex. input interger 1234, return "1234" in string or characters
+//2 Answers
+//What a fibonacci function which return N th position number both in recursive and loop, also give the explanation on both implementation on their time efficiency.
+//5 Answers
+//What is HashMap ? Give the comparison on HashMap and TreeMap, that is the efficiency on their intersection and traverse.
