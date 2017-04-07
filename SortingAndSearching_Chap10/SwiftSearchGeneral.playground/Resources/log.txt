@@ -1,0 +1,11 @@
+001 <timestamp> BEGIN
+001 <timestamp> fetched from db
+001 <timestamp> some processing ..
+002 <timestamp> BEGIN ..
+002 <timestamp> fetched from db
+001 <timestamp> returned success
+003 <timestamp> BEGIN
+001 <timestamp> END
+003 <timestamp> some work
+002 <timestamp> ERROR
+003 <timestamp> some other work

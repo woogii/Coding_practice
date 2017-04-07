@@ -283,37 +283,6 @@ print(findCombinationOfNumberList(sum: 36))
 //{[]}() => true
 //{[}] => false
 //
-//2.
-//Sort the content of the a file based on second field, e.g.
-//
-//Input file:
-//Jervie,12,M
-//Jaimy,11,F
-//Tony,23,M
-//Janey,11,F
-//
-//Output file:
-//Jaimy,11,F
-//Janey,11,F
-//Jervie,12,M
-//Tony,23,M
-//don’t worry about open file, close file etc
-
-let array = ["Jervie,12,M", "Jaimy,11,F", "Tony,23,M", "Janey,11,F"]
-var intStringArrayPairDict = [String:Int]()
-
-for i in 0..<array.count {
-
-  intStringArrayPairDict[array[i]] = Int(array[i].components(separatedBy: ",")[1])
-}
-
-print(intStringArrayPairDict)
-
-for arr in intStringArrayPairDict.sorted(by:<).map({$0.key}) {
-  print("\(arr)")
-}
-
-//print(intStringArrayPairDict.sorted(by:<).map({$0.key}))
 
 
 
@@ -323,6 +292,34 @@ for arr in intStringArrayPairDict.sorted(by:<).map({$0.key}) {
 //Given a integer , return corresponding ASCII char representation without using language building in feature.
 //
 //ex. input interger 1234, return "1234" in string or characters
+
+
+func convertIntToString(number:Int)->String{
+  
+  var digit:Int
+  var mutableNumber = number
+  var numberString = ""
+  
+  if number < 0 {
+    mutableNumber = -1 * mutableNumber
+  }
+  
+  while(mutableNumber > 0) {
+    
+    digit = mutableNumber % 10
+    numberString = "\(digit)" + numberString
+    mutableNumber = mutableNumber / 10
+  }
+  
+  if number < 0 {
+    numberString = "-" + numberString
+  }
+  
+  return numberString
+}
+
+convertIntToString(number: 3524)
+
 //2 Answers
 //What a fibonacci function which return N th position number both in recursive and loop, also give the explanation on both implementation on their time efficiency.
 //5 Answers
