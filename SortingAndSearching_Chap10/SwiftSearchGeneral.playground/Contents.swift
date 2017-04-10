@@ -128,3 +128,13 @@ extension StreamReader : Sequence {
     }
   }
 }
+
+
+
+
+// Problem 10.5
+let stringList = ["at","","","","ball","","","car","","","dad","",""]
+stringList.index(of: "ball")
+
+
+

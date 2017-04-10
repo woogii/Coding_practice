@@ -1,7 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
-
+import Foundation
 
 var dict = Dictionary<Character,Int>()
 var myDictionary: [Int: [Character: Int]] = [0:[:], 1:[:],2:[:],3:[:], 4:[:]]
@@ -324,3 +324,62 @@ convertIntToString(number: 3524)
 //What a fibonacci function which return N th position number both in recursive and loop, also give the explanation on both implementation on their time efficiency.
 //5 Answers
 //What is HashMap ? Give the comparison on HashMap and TreeMap, that is the efficiency on their intersection and traverse.
+
+
+let strTest = "abcdefg"
+
+let prefixString = String(strTest.characters.prefix(1))
+let prefixString2 = String(strTest.characters.prefix(through: strTest.index(strTest.startIndex, offsetBy: 2)))
+
+let suffixString = String(strTest.characters.suffix(from: strTest.index(strTest.endIndex, offsetBy: -2)))
+
+func isSubString(sourceString:String,targetString:String)-> Bool {
+  
+  return sourceString.contains(targetString)
+//  guard sourceString != targetString else {
+//    return true
+//  }
+//  
+//  let stringLength = sourceString.characters.count
+//
+//  
+//  for i in 0..<stringLength - 2 {
+//    
+//    let splittedString = String(sourceString.characters.prefix(i+1))
+//    
+//    let splittedString2 = String(sourceString.characters.suffix(from:
+//       sourceString.index(sourceString.startIndex, offsetBy: i+1)))
+//    
+//    print("str1 : \(splittedString)")
+//    print("str2 : \(splittedString2)")
+//    
+//    if splittedString2.contains(targetString) || splittedString.contains(targetString) {
+//      return true
+//    }
+//  }
+//  
+//  return false
+}
+
+
+// Problem 1.9 
+
+isSubString(sourceString: "waterbottle", targetString: "erbottlewat")
+
+func checkRotation(source:String,target:String)-> Bool {
+  
+  let sourceLength = source.characters.count
+  let targetLength = target.characters.count
+  
+  if sourceLength == targetLength {
+    
+    let str3 = source + source
+    
+    return isSubString(sourceString: str3, targetString: target)
+    
+  }
+  
+  return false
+}
+
+checkRotation(source: "waterbottle", target: "erbottlewat")
