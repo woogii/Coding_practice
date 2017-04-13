@@ -134,7 +134,129 @@ extension StreamReader : Sequence {
 
 // Problem 10.5
 let stringList = ["at","","","","ball","","","car","","","dad","",""]
-stringList.index(of: "ball")
+//stringList.index(of: "ball")
+
+//func searchStringAmongEmpty(list:[String],keyword:String)->Int {
+//  
+//  var low = 0
+//  var high = list.count - 1
+//  
+//  while(low<high) {
+//    
+//    var mid = (low+high)/2
+//    print("low : \(low)")
+//    print("mid: \(mid)")
+//    print("high: \(high)")
+//    
+//    if list[mid] == keyword {
+//      return mid
+//      
+//    } else if list[mid] != "" {
+//      
+//      if list[mid] > keyword {
+//        high = mid - 1
+//      } else {
+//        low = mid + 1
+//      }
+//      
+//    } else {
+//      
+//      var left = mid - 1
+//      var right = mid + 1
+//      
+//      while(true) {
+//      
+//        if left < low && right > high {
+//          return -1
+//        }
+//        
+//        if ( right <= high && list[right] != "") {
+//          
+//          if list[right] == keyword {
+//            return right
+//          } else if list[right] > keyword {
+//            high = right - 1
+//          } else {
+//            low = right + 1
+//          }
+//          
+//          break
+//        } else if ( left >= low && list[left] != "" ) {
+//          
+//          if list[left] == keyword {
+//            return left
+//          } else if list[left] > keyword {
+//            high = left - 1
+//          } else {
+//            low = left + 1
+//          }
+//          break
+//        }
+//        
+//        left -= 1
+//        right += 1
+//      }
+//    }
+//  }
+//
+//  return -1
+//  
+//}
+
+func performSearchStringInList(list:[String],keyword:String)->Int{
+  if list.isEmpty || keyword.isEmpty {
+    return -1
+  }
+  return searchStringInList(list: list, keyword: keyword, low: 0, high: list.count-1)
+}
+
+func searchStringInList(list:[String],keyword:String, low:Int, high:Int)->Int {
+
+  if low > high {
+    return -1
+  }
+  
+  var mid = (low+high)/2
+  
+  if list[mid] == "" {
+    
+    var left = mid - 1
+    var right = mid + 1
+    
+    while (true) {
+    
+      if left < low && right > high {
+        return -1
+      }
+      
+      if right <= high && list[right] != "" {
+        mid = right
+        break
+      } else if left >= low && list[left] != "" {
+        mid = left
+        break
+      }
+      
+      left -= 1
+      right += 1
+      
+      print("left : \(left)")
+      print("right : \(right)")
+      
+    }
+  }
+  
+  if list[mid] == keyword {
+    return mid
+  } else if list[mid] > keyword {
+    return searchStringInList(list: list,keyword: keyword, low: low, high: mid-1)
+  } else {
+    return searchStringInList(list: list,keyword: keyword, low: mid+1, high: high)
+  }
+  
+}
+
+performSearchStringInList(list: stringList, keyword: "dada")
 
 
 

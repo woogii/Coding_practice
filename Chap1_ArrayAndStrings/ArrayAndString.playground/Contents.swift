@@ -387,6 +387,6 @@ checkRotation(source: "waterbottle", target: "erbottlewat")
 let tracks = ["a","b","c","d","e"]
 let index = tracks.index(where:{return $0 == "b"})
 let prefixArray = tracks.prefix(upTo:3)
-let suffixArray = tracks.suffix(from:3)
+let suffixArray = tracks.suffix(from:1)
 
 let arr = suffixArray + prefixArray
