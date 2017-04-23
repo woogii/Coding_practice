@@ -28,6 +28,11 @@ extension String {
   func indexAt(index:Int)->Character {
     return self[self.index(self.startIndex, offsetBy:index)]
   }
+  
+  subscript (i:Int) -> Character {
+  
+    return self[self.index(self.startIndex, offsetBy:i)]
+  }
 }
 
 /* Find the first non-repeated character in String Array */
@@ -390,3 +395,75 @@ let prefixArray = tracks.prefix(upTo:3)
 let suffixArray = tracks.suffix(from:1)
 
 let arr = suffixArray + prefixArray
+
+func permutations(_ n: Int, _ k: Int) -> Int {
+  var n = n
+  var answer = n
+  for _ in 1..<k {
+    n -= 1
+    answer *= n
+  }
+  return answer
+}
+
+permutations(9, 4)
+
+func permuteWirth<T>(_ a: [T], _ n: Int) {
+  if n == 0 {
+    print(a)   // display the current permutation
+  } else {
+    var a = a
+    permuteWirth(a, n - 1)
+    for i in 0..<n {
+      swap(&a[i], &a[n])
+      permuteWirth(a, n - 1)
+      swap(&a[i], &a[n])
+    }
+  }
+}
+
+
+permuteWirth(["x","y","z"], 2)
+
+
+func reverseString(_ sentence:inout String)->String {
+  
+  var reversedString = ""
+  
+  let length = sentence.characters.count
+  
+  for i in 0..<sentence.characters.count {
+    reversedString.append(sentence[length-1-i])
+  }
+  
+  return reversedString
+  
+}
+
+var sampleSentence = "This is a test"
+reverseString(&sampleSentence)
+
+func findNonDuplicate()->Int {
+
+  var dict = [Int:Int]()
+  
+  for element in numberArray {
+    
+    dict[element] = (dict[element] ?? 0)  + 1
+  }
+  
+  for element in numberArray {
+    if dict[element] == 1 {
+      return element
+    }
+  }
+  
+  return -1
+}
+
+let numberArray = [1,2,3,5,12,6,2,3,5,12,6,1,13]
+findNonDuplicate()
+
+
+
+
