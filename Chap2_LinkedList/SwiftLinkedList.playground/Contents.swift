@@ -151,15 +151,26 @@ func printNthElementFromLast<T>(node:Node<T>?, N:Int)->Int {
 
 printNthElementFromLast(node: linkedList.head, N: 3)
 
-var head = linkedList.head
+var head = Node(element: "apple")
 
-func reverseLinkedListRecursive<T>(prev:Node<T>?, curr:Node<T>?) {
+func reverseLinkedListRecursive<T>(list:LinkedList<T>, prev:Node<T>?, curr:Node<T>?) {
+  
+  if prev == nil {
+    list.tail = curr
+  }
   
   if curr != nil {
-    reverseLinkedListRecursive(prev: curr, curr: curr?.next)
+    reverseLinkedListRecursive(list: list, prev: curr, curr: curr?.next)
     curr?.next = prev
   } else {
-    head = prev
+    list.head = prev
   }
 }
 
+linkedList.head?.element
+linkedList.tail?.element
+
+reverseLinkedListRecursive(list:linkedList, prev: nil, curr: linkedList.head)
+linkedList
+linkedList.head?.element
+linkedList.tail?.element
