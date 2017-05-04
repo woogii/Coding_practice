@@ -130,3 +130,5 @@ extension Node where T : Equatable {
 print(beverages.search(value: "milk") ?? "")
 beverages.delete(value: "hot")
 print(beverages)
+
+

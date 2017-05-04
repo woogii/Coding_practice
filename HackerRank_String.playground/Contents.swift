@@ -47,3 +47,29 @@ while(true) {
 }
 
 
+var camelCaseString = "saveChangesInTheEditor"
+var camelCaseStringCount = 1
+var low = 0
+var high = camelCaseString.characters.count - 1
+
+//for i in 0..<camelCaseString.characters.count {
+  
+let returnValue = camelCaseString.characters.filter({ (char) in
+  return char >= "A" && char <= "Z"
+})
+
+print(returnValue.count + 1)
+
+
+//  if camelCaseString[i] >= "A" && camelCaseString[i] <= "Z" {
+//    camelCaseStringCount += 1
+//  }
+//}
+
+while(low<high) {
+  
+  break
+  
+}
+
+print(camelCaseStringCount)

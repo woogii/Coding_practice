@@ -410,7 +410,7 @@ permutations(9, 4)
 
 func permuteWirth<T>(_ a: [T], _ n: Int) {
   if n == 0 {
-    print(a)   // display the current permutation
+    //print(a)   // display the current permutation
   } else {
     var a = a
     permuteWirth(a, n - 1)
@@ -464,6 +464,42 @@ func findNonDuplicate()->Int {
 let numberArray = [1,2,3,5,12,6,2,3,5,12,6,1,13]
 findNonDuplicate()
 
+
+
+let sampleString = "man"
+
+func permutaion<T>(sampleString:inout Array<T>, firstIndex:Int, lastIndex:Int, permatatedStringSet: inout Set<String>) {
+  
+  
+  if firstIndex == lastIndex {
+    let convertedString = String(describing: sampleString)
+    if !permatatedStringSet.contains(convertedString) {
+      print(convertedString)
+      permatatedStringSet.insert(convertedString)
+    }
+    return
+  } else {
+    
+    for i in firstIndex...lastIndex {
+      
+      swapCharacterInString(i: i, j: firstIndex, targetString: &sampleString)
+      permutaion(sampleString: &sampleString, firstIndex: firstIndex + 1, lastIndex: lastIndex, permatatedStringSet: &permatatedStringSet)
+      swapCharacterInString(i: i, j: firstIndex, targetString: &sampleString)
+    }
+  }
+  
+}
+
+func swapCharacterInString<T>(i:Int, j:Int, targetString:inout Array<T>) {
+  
+  if i != j {
+    swap(&targetString[i],&targetString[j])
+  }
+}
+
+var charArray = Array("MAN".characters)
+var initialStringSet = Set<String>()
+permutaion(sampleString: &charArray, firstIndex: 0, lastIndex: String(charArray).characters.count - 1, permatatedStringSet: &initialStringSet)
 
 
 

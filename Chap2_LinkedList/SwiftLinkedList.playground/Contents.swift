@@ -130,7 +130,7 @@ extension LinkedList : CustomStringConvertible {
   }
 }
 
-linkedList
+print(linkedList)
 
 
 func printNthElementFromLast<T>(node:Node<T>?, N:Int)->Int {
@@ -153,6 +153,64 @@ printNthElementFromLast(node: linkedList.head, N: 3)
 
 var head = Node(element: "apple")
 
+
+
+
+func reverseLinkedList() {
+
+  var prev:Node<String>?
+  var currentNode = linkedList.head
+  linkedList.tail = currentNode
+  var next:Node<String>?
+  
+  while(currentNode != nil) {
+    
+    next = currentNode?.next
+    currentNode?.next = prev
+    prev = currentNode
+    currentNode = next
+    
+  }
+
+  linkedList.head = prev
+}
+
+reverseLinkedList()
+linkedList
+
+//print("linked list : \(linkedList)")
+
+//linkedList.head?.element
+//linkedList.tail?.element
+//
+
+print("reversed list")
+
+
+//func reverseLinkedListRecursive<T>(list:LinkedList<T>, prev:Node<String>?, curr:Node<String>?) {
+//
+//  var previousNode = prev
+//  var currentNode = curr
+//  var nextNode:Node<String>?
+//  
+//  if curr == nil {
+//    linkedList.head = previousNode
+//    return
+//  } else {
+//    
+//    nextNode = curr?.next
+//    currentNode?.next = previousNode
+//    previousNode = currentNode
+//    currentNode = nextNode
+//    
+//    
+//    print(curr?.element as Any)
+//    reverseLinkedListRecursive(list: list, prev: previousNode, curr: currentNode)
+//  }
+//  
+//}
+
+
 func reverseLinkedListRecursive<T>(list:LinkedList<T>, prev:Node<T>?, curr:Node<T>?) {
   
   if prev == nil {
@@ -167,10 +225,8 @@ func reverseLinkedListRecursive<T>(list:LinkedList<T>, prev:Node<T>?, curr:Node<
   }
 }
 
-linkedList.head?.element
-linkedList.tail?.element
 
 reverseLinkedListRecursive(list:linkedList, prev: nil, curr: linkedList.head)
 linkedList
-linkedList.head?.element
-linkedList.tail?.element
+//linkedList.head?.element
+//linkedList.tail?.element
