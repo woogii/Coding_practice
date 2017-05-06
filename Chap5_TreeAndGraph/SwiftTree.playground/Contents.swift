@@ -47,17 +47,17 @@ beverages.add(child: coldBeverages)
 
 hotBeverages.add(child: tea)
 hotBeverages.add(child: coffee)
-hotBeverages.add(child: cocoa)
+//hotBeverages.add(child: cocoa)
 
 tea.add(child: black)
 tea.add(child: green)
-tea.add(child: chai)
+//tea.add(child: chai)
 
 coldBeverages.add(child: soda)
 coldBeverages.add(child: milk)
 
-soda.add(child: gingerAle)
-soda.add(child: bitterLemon)
+//soda.add(child: gingerAle)
+//soda.add(child: bitterLemon)
 
 
 extension Node : CustomStringConvertible {
@@ -128,7 +128,7 @@ extension Node where T : Equatable {
 
 
 print(beverages.search(value: "milk") ?? "")
-beverages.delete(value: "hot")
+//beverages.delete(value: "hot")
 print(beverages)
 
 
