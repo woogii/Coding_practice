@@ -4,7 +4,7 @@ open class AdjacencyList<T: Hashable> {
   
   public var adjacencyDict : [Vertex<T>: [Edge<T>]] = [:]
   public init() {}
-  
+   
   fileprivate func addDirectedEdge(from source:Vertex<Element>, to destination:Vertex<Element>, weight:Double?) {
     let edge = Edge(source: source, destination: destination, weight: weight)
     adjacencyDict[source]?.append(edge)
