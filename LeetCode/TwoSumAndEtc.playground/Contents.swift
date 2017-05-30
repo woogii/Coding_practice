@@ -245,6 +245,7 @@ getLengthOfLongestSubstring(str:"aab")
 //}
 //return result;
 
+// 7. Reverse Integer
 
 func reverse(_ x: Int)-> Int {
   
@@ -276,5 +277,44 @@ func reverse(_ x: Int)-> Int {
 }
 
 // print(reverse(1534236469))
-
 print(reverse(1463847412))
+
+
+func isPalindrome(_ x: Int)->Bool {
+  
+  var origin = x
+  var div = 1
+  var divideVal:Int
+  var modValue:Int
+  
+  if x < 0 {
+    return false
+  }
+  
+  while(origin/div >= 10) {
+    div = div * 10
+  }
+  
+  while( origin != 0) {
+    
+    divideVal = origin / div
+    modValue = origin % 10
+    
+    if divideVal != modValue {
+      return false
+    }
+    
+    origin = (origin % div)/10
+    div /= 100
+  }
+  
+  return true
+}
+
+isPalindrome(121)
+isPalindrome(1331)
+isPalindrome(1213)
+
+
+
+
