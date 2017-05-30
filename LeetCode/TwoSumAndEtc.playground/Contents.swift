@@ -1,7 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
-
+import Foundation
 
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
 
@@ -156,4 +156,125 @@ node2.next = node3
 addTwoNumbers(node1, node2)
 
 
+extension String {
+  
+  func charAt(index:Int)-> Character {
+    return self[self.characters.index(self.characters.startIndex, offsetBy: index)]
+  }
+}
 
+extension Character {
+  var asciiValue: UInt32? {
+    return String(self).unicodeScalars.filter{$0.isASCII}.first?.value
+  }
+}
+
+//var str = "bca"
+//print(str.index(str.startIndex, offsetBy: 1))
+//str[str.index(str.startIndex, offsetBy: 2)]
+
+var arr = [Int].init(repeating: 3, count: 0)
+//print(arr[0])
+
+func getLengthOfLongestSubstring(str:String) -> Int {
+  
+  var dict = [Character:Int]()
+  var substringLen = 0
+  var j = 0
+  
+  guard str.characters.count > 0 else {
+    return 0
+  }
+  
+//  var cache = [Int].init(repeating: 0, count: 256)
+//  cache.reserveCapacity(256)
+//  
+//  for i in 0..<str.characters.count {
+//    
+//    if let value = str.charAt(index: i).asciiValue {
+//      
+//      j = (cache[Int(value)] > 0) ? max(j, cache[Int(value)]) : j
+//    
+//      cache[Int(value)] = i + 1
+//      substringLen = max(substringLen, i - j + 1)
+//    }
+//  }
+
+  
+  for i in 0..<str.characters.count {
+    
+    if let _ = dict[str[str.index(str.startIndex, offsetBy: i)]] {
+      j = max(j, dict[str[str.index(str.startIndex, offsetBy: i)]]! + 1)
+    }
+    
+    dict[str[str.index(str.startIndex, offsetBy: i)]] = i
+    substringLen = max(j, i-j+1)
+  }
+  
+  return substringLen
+}
+
+getLengthOfLongestSubstring(str:"aab")
+
+// var dict = [Character:Int]()
+// var substringLen = 0
+// var j = 0
+
+// guard s.characters.count > 0 else {
+//     return 0
+// }
+
+// for i in 0..<s.characters.count {
+
+//     if let _ = dict[s.charAt(index: i)] {
+//         j = max(j, dict[s.charAt(index: i)]! + 1)
+//     }
+
+//     dict[s.charAt(index: i)] = i
+//     substringLen = max(substringLen, i-j+1)
+// }
+
+// return substringLen
+
+//int result = 0;
+//int[] cache = new int[256];
+//for (int i = 0, j = 0; i < s.length(); i++) {
+//  j = (cache[s.charAt(i)] > 0) ? Math.max(j, cache[s.charAt(i)]) : j;
+//  cache[s.charAt(i)] = i + 1;
+//  result = Math.max(result, i - j + 1);
+//}
+//return result;
+
+
+func reverse(_ x: Int)-> Int {
+  
+  var result:Int32 = 0
+  var mutableX = x
+  var modValue:Int
+  
+  while(mutableX != 0) {
+    
+    modValue = mutableX % 10
+    mutableX = mutableX / 10
+    print(Int32.max)
+    if result >= (Int32.min/10) && result <= (Int32.max/10) {
+      
+      result = result * 10
+      print("result : \(result)")
+      let addResult = Int32.addWithOverflow(Int32(modValue), result)
+      
+      if !addResult.overflow {
+        result = modValue + result
+      }
+    } else {
+      return 0
+    }
+  }
+  
+
+  return Int(result)
+}
+
+// print(reverse(1534236469))
+
+print(reverse(1463847412))
