@@ -186,35 +186,32 @@ func getLengthOfLongestSubstring(str:String) -> Int {
     return 0
   }
   
-//  var cache = [Int].init(repeating: 0, count: 256)
-//  cache.reserveCapacity(256)
-//  
 //  for i in 0..<str.characters.count {
 //    
-//    if let value = str.charAt(index: i).asciiValue {
-//      
-//      j = (cache[Int(value)] > 0) ? max(j, cache[Int(value)]) : j
-//    
-//      cache[Int(value)] = i + 1
-//      substringLen = max(substringLen, i - j + 1)
+//    if let _ = dict[str[str.index(str.startIndex, offsetBy: i)]] {
+//      j = max(j, dict[str[str.index(str.startIndex, offsetBy: i)]]! + 1)
 //    }
+//    
+//    dict[str[str.index(str.startIndex, offsetBy: i)]] = i
+//    substringLen = max(substringLen, i-j+1)
 //  }
-
   
-  for i in 0..<str.characters.count {
+  for (i, char) in str.characters.enumerated() {
     
-    if let _ = dict[str[str.index(str.startIndex, offsetBy: i)]] {
-      j = max(j, dict[str[str.index(str.startIndex, offsetBy: i)]]! + 1)
+    if let _ = dict[char] {
+      j = max(j, dict[char]! + 1)
     }
     
-    dict[str[str.index(str.startIndex, offsetBy: i)]] = i
-    substringLen = max(j, i-j+1)
+    dict[char] = i
+    substringLen = max(substringLen, i-j+1)
+    
   }
+
   
   return substringLen
 }
 
-getLengthOfLongestSubstring(str:"aab")
+getLengthOfLongestSubstring(str:"abcadea")
 
 // var dict = [Character:Int]()
 // var substringLen = 0
@@ -257,11 +254,11 @@ func reverse(_ x: Int)-> Int {
     
     modValue = mutableX % 10
     mutableX = mutableX / 10
-    print(Int32.max)
+    
     if result >= (Int32.min/10) && result <= (Int32.max/10) {
       
       result = result * 10
-      print("result : \(result)")
+     
       let addResult = Int32.addWithOverflow(Int32(modValue), result)
       
       if !addResult.overflow {
@@ -276,7 +273,7 @@ func reverse(_ x: Int)-> Int {
   return Int(result)
 }
 
-// print(reverse(1534236469))
+
 print(reverse(1463847412))
 
 
@@ -317,4 +314,83 @@ isPalindrome(1213)
 
 
 
+struct Stack {
+  
+  fileprivate var element:[Character]
+  
+  init() {
+    element = [Character]()
+  }
+  
+  public mutating func push(char:Character) {
+    element.append(char)
+  }
+  
+  public mutating func pop()->Character{
+    let last = element.removeLast()
+    return last
+  }
+  
+  public func peek()->Character?{
+    return element.last
+  }
+  
+  public func count()->Int {
+    return element.count
+  }
+  
+  public func isEmpty()->Bool {
+    if element.count == 0 {
+      return true
+    } else {
+      return false
+    }
+  }
+  
+}
 
+func isValid(_ s:String)->Bool {
+  
+  var stack = Stack()
+  
+  for (_, char) in s.characters.enumerated() {
+    
+    
+    if char == "(" || char == "[" || char == "{" {
+      stack.push(char: char)
+    } else {
+      
+      if let stackLastElement = stack.peek() {
+        
+        if char == ")" && stackLastElement == "(" {
+          stack.pop()
+        } else if char == "]" && stackLastElement == "[" {
+          stack.pop()
+        } else if char == "}" && stackLastElement == "{" {
+          stack.pop()
+        } else {
+          stack.push(char: char)
+        }
+      } else {
+        stack.push(char: char)
+      }
+    }
+  
+  }
+  
+  return stack.isEmpty()
+  
+//  if stack.count() == 0 {
+//    return true
+//  } else {
+//    return false
+//  }
+  
+}
+
+isValid("[]")
+isValid("[](){}")
+isValid("[}")
+isValid("[()]")
+isValid("[(])")
+isValid("]")
