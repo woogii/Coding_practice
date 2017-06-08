@@ -4,54 +4,54 @@ import UIKit
 import Foundation
 
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-
-//  1. brute force search
   
-//  var indices = [Int]()
-//  var remain:Int
-//  
-//  for i in 0..<nums.count {
-//    
-//    indices = []
-//    indices.append(nums[i])
-//    remain = target - nums[i]
-//
-//    for j in 0..<nums.count {
-//      
-//      if i != j {
-//        if remain - nums[j] == 0 {
-//          indices.append(nums[j])
-//          return indices
-//        }
-//      }
-//      
-//    }
-//  }
-//  
-//  return indices
+  //  1. brute force search
+  
+  //  var indices = [Int]()
+  //  var remain:Int
+  //
+  //  for i in 0..<nums.count {
+  //
+  //    indices = []
+  //    indices.append(nums[i])
+  //    remain = target - nums[i]
+  //
+  //    for j in 0..<nums.count {
+  //
+  //      if i != j {
+  //        if remain - nums[j] == 0 {
+  //          indices.append(nums[j])
+  //          return indices
+  //        }
+  //      }
+  //
+  //    }
+  //  }
+  //
+  //  return indices
   
   var dict = [Int:Int]()
   
   //  2. Use Hash
   
-//  for i in 0..<nums.count {
-//    dict[nums[i]] = i
-//  }
-//  
-//  print(dict)
-//  
-//  for i in 0..<nums.count {
-//    
-//    let remain = target-nums[i]
-//    
-//    if let index = dict[remain], index != i {
-//      return [index, i]
-//    }
-//
-//    
-//    
-//  }
-//  
+  //  for i in 0..<nums.count {
+  //    dict[nums[i]] = i
+  //  }
+  //
+  //  print(dict)
+  //
+  //  for i in 0..<nums.count {
+  //
+  //    let remain = target-nums[i]
+  //
+  //    if let index = dict[remain], index != i {
+  //      return [index, i]
+  //    }
+  //
+  //
+  //
+  //  }
+  //
   for i in 0..<nums.count {
     
     let remain = target-nums[i]
@@ -63,8 +63,8 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     dict[nums[i]] = i
     
   }
-
- 
+  
+  
   return [Int]()
 }
 
@@ -108,7 +108,7 @@ extension ListNode : CustomStringConvertible {
 
 
 func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-
+  
   var mutableL1 = l1
   var mutableL2 = l2
   let initialL3:ListNode = ListNode(0)
@@ -116,7 +116,7 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
   var carry = 0
   
   while(mutableL1 != nil || mutableL2 != nil) {
-  
+    
     l3.next = ListNode(0)
     l3 = l3.next!
     
@@ -186,15 +186,15 @@ func getLengthOfLongestSubstring(str:String) -> Int {
     return 0
   }
   
-//  for i in 0..<str.characters.count {
-//    
-//    if let _ = dict[str[str.index(str.startIndex, offsetBy: i)]] {
-//      j = max(j, dict[str[str.index(str.startIndex, offsetBy: i)]]! + 1)
-//    }
-//    
-//    dict[str[str.index(str.startIndex, offsetBy: i)]] = i
-//    substringLen = max(substringLen, i-j+1)
-//  }
+  //  for i in 0..<str.characters.count {
+  //
+  //    if let _ = dict[str[str.index(str.startIndex, offsetBy: i)]] {
+  //      j = max(j, dict[str[str.index(str.startIndex, offsetBy: i)]]! + 1)
+  //    }
+  //
+  //    dict[str[str.index(str.startIndex, offsetBy: i)]] = i
+  //    substringLen = max(substringLen, i-j+1)
+  //  }
   
   for (i, char) in str.characters.enumerated() {
     
@@ -206,7 +206,7 @@ func getLengthOfLongestSubstring(str:String) -> Int {
     substringLen = max(substringLen, i-j+1)
     
   }
-
+  
   
   return substringLen
 }
@@ -258,7 +258,7 @@ func reverse(_ x: Int)-> Int {
     if result >= (Int32.min/10) && result <= (Int32.max/10) {
       
       result = result * 10
-     
+      
       let addResult = Int32.addWithOverflow(Int32(modValue), result)
       
       if !addResult.overflow {
@@ -269,7 +269,7 @@ func reverse(_ x: Int)-> Int {
     }
   }
   
-
+  
   return Int(result)
 }
 
@@ -375,16 +375,16 @@ func isValid(_ s:String)->Bool {
         stack.push(char: char)
       }
     }
-  
+    
   }
   
   return stack.isEmpty()
   
-//  if stack.count() == 0 {
-//    return true
-//  } else {
-//    return false
-//  }
+  //  if stack.count() == 0 {
+  //    return true
+  //  } else {
+  //    return false
+  //  }
   
 }
 
@@ -394,3 +394,7 @@ isValid("[}")
 isValid("[()]")
 isValid("[(])")
 isValid("]")
+
+
+
+
