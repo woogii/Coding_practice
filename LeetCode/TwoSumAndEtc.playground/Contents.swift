@@ -396,5 +396,56 @@ isValid("[(])")
 isValid("]")
 
 
+func containsDuplicate(_ nums:[Int]) -> Bool {
+  
+  var dict:[Int:Int] = [:]
+
+//  for i in 0..<nums.count {
+    
+//    dict[nums[i]] = (dict[nums[i]] ?? 0) + 1
+//    
+//    if dict[nums[i]]! > 1{
+//      return true
+//    }
+//  }
+  
+  for element in nums {
+    
+    if let _ = dict[element] {
+      return true
+    } else {
+      dict[element] = 1
+    }
+    
+  }
+  
+  return false
+  
+}
+
+containsDuplicate([1,2,2])
 
 
+func moveZeroes(_ nums: inout [Int]) {
+  
+  var insertPosition = 0
+  
+  if nums.count == 0 {
+    return
+  }
+  
+  for i in 0..<nums.count {
+    if nums[i] != 0 {
+      nums[insertPosition] = nums[i]
+      insertPosition += 1
+    }
+  }
+  
+  while( insertPosition < nums.count) {
+    nums[insertPosition] = 0
+    insertPosition += 1
+  }
+}
+
+var zeroContainArr = [0,0,1,2]
+moveZeroes(&zeroContainArr)

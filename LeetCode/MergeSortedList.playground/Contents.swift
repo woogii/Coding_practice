@@ -120,7 +120,7 @@ func mergeTwo2Lists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
 }
 
 
-var node_1 = ListNode(2)
+var node_1:ListNode? = ListNode(2)
 //var node_2 = ListNode(13)
 //node_1.next = node_2
 //var node_3 = ListNode(21)
@@ -142,17 +142,17 @@ var node_1 = ListNode(2)
 //var node_3 = ListNode(4)
 //node_2.next = node_3
 
-var node_5 = ListNode(1)
+var node_5:ListNode? = ListNode(1)
 
 //print(node_1)
 print(node_5)
 
 
 
-func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+func mergeTwoLists( l1: inout ListNode?, l2: inout ListNode?) -> ListNode? {
   
   
-   if l1 == nil && l2 == nil {
+  if l1 == nil && l2 == nil {
     return nil
   } else if l1 == nil {
     return l2
@@ -160,28 +160,26 @@ func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
     return l1
   }
   
-  var mutableL1 = l1
-  var mutableL2 = l2
-  
   let dummy = ListNode(0)
-  var tail = dummy
+  var curr = dummy
   
-  while mutableL1 != nil && mutableL2 != nil {
+  while l1 != nil && l2 != nil {
     
-    if mutableL1!.val < mutableL2!.val {
-      tail.next = mutableL1
-      mutableL1 = mutableL1!.next
+    if l1!.val < l2!.val {
+      curr.next = l1
+      l1 = l1!.next
     } else {
-      tail.next = mutableL2
-      mutableL2 = mutableL2?.next
+      curr.next = l2
+      l2 = l2?.next
     }
-    tail = tail.next!
+    curr = curr.next!
   }
   
-  tail.next = (mutableL1 != nil) ? mutableL1 : mutableL2
+  curr.next = (l1 != nil) ? l1 : l2
   return dummy.next
 }
-var newList = mergeTwoLists(node_1, node_5)
+
+var newList = mergeTwoLists(l1: &node_1, l2: &node_5)
 
 
 //print(newList!.val)
