@@ -449,3 +449,23 @@ func moveZeroes(_ nums: inout [Int]) {
 
 var zeroContainArr = [0,0,1,2]
 moveZeroes(&zeroContainArr)
+
+public class Interval {
+  
+  public var start : Int
+  public var end : Int
+  public init(_ start:Int, _ end:Int) {
+    self.start = start
+    self.end = end
+  }
+  
+}
+
+func merge(_ intervals:[Interval])->[Interval] {
+  
+  return [Interval]()
+}
+
+merge([Interval(1,3), Interval(2,6), Interval(8,10), Interval(15,18)])
+
+
