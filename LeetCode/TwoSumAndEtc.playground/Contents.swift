@@ -459,13 +459,46 @@ public class Interval {
     self.end = end
   }
   
+  
 }
 
 func merge(_ intervals:[Interval])->[Interval] {
   
-  return [Interval]()
+  guard intervals.count > 1 else {
+    return intervals
+  }
+  
+  var i = 0
+
+  var sortedIntervals = intervals.sorted {
+    return $0.start < $1.start
+  }
+  
+  
+  
+  while( i <= sortedIntervals.count - 2 && sortedIntervals.count > 1) {
+  
+    
+    if sortedIntervals[i].end >= sortedIntervals[i+1].start {
+      
+      if sortedIntervals[i].end <= sortedIntervals[i+1].end {
+        sortedIntervals[i].end = sortedIntervals[i+1].end
+      }
+
+      sortedIntervals.remove(at: i+1)
+      
+    } else {
+      i = i + 1
+    }
+    
+  }
+  
+  return sortedIntervals
 }
 
-merge([Interval(1,3), Interval(2,6), Interval(8,10), Interval(15,18)])
-
-
+//merge([Interval(1,3), Interval(2,6), Interval(8,10), Interval(15,18)])
+//merge([Interval(1,3)])
+//merge([])
+//
+//merge([Interval(1,3), Interval(4,7), Interval(6,12)])
+merge([Interval(1,4), Interval(0,4)])
