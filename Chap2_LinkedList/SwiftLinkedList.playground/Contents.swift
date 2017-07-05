@@ -63,11 +63,11 @@ class Node<T> {
   init(element:T) {
     self.element = element
   }
+  
 }
 
+class LinkedList<T> {
 
-public class LinkedList<T>  {
-  
   var head:Node<T>?
   var tail:Node<T>?
   
@@ -78,19 +78,12 @@ public class LinkedList<T>  {
   func append(newNode:Node<T>) {
     
     if let tailNode = tail {
-      
       tailNode.next = newNode
-      
     } else {
-      
       head = newNode
     }
-    
     tail = newNode
   }
-  
-  
-  
 }
 
 
@@ -132,21 +125,22 @@ extension LinkedList : CustomStringConvertible {
 
 print(linkedList)
 
-
-func printNthElementFromLast<T>(node:Node<T>?, N:Int)->Int {
+func printNthElementFromLast<T>(node:Node<T>?, N:Int) ->Int {
   
   if node == nil {
     return 0
   }
-  
+    
   let index = printNthElementFromLast(node: node?.next, N: N) + 1
-  
+    
+  print(index)
+    
   if index == N {
-    print("\(node?.element!)")
+    print("last nth Element from last : \(String(describing: node?.element!))")
   }
   
-  return index
   
+  return index
 }
 
 printNthElementFromLast(node: linkedList.head, N: 3)
@@ -156,24 +150,34 @@ var head = Node(element: "apple")
 
 
 
+//func reverseLinkedList() {
+
+//  var prev:Node<String>?
+//  var currentNode = linkedList.head
+//  linkedList.tail = currentNode
+//  var next:Node<String>?
+//  
+//  while(currentNode != nil) {
+//    
+//    next = currentNode?.next
+//    currentNode?.next = prev
+//    prev = currentNode
+//    currentNode = next
+//    
+//  }
+//
+//  linkedList.head = prev
+//}
+
+
+
+
 func reverseLinkedList() {
-
-  var prev:Node<String>?
-  var currentNode = linkedList.head
-  linkedList.tail = currentNode
-  var next:Node<String>?
   
-  while(currentNode != nil) {
-    
-    next = currentNode?.next
-    currentNode?.next = prev
-    prev = currentNode
-    currentNode = next
-    
-  }
-
-  linkedList.head = prev
+  
+  
 }
+
 
 reverseLinkedList()
 linkedList
@@ -213,17 +217,18 @@ print("reversed list")
 
 func reverseLinkedListRecursive<T>(list:LinkedList<T>, prev:Node<T>?, curr:Node<T>?) {
   
-  if prev == nil {
-    list.tail = curr
-  }
-  
-  if curr != nil {
-    reverseLinkedListRecursive(list: list, prev: curr, curr: curr?.next)
-    curr?.next = prev
-  } else {
-    list.head = prev
-  }
+//  if prev == nil {
+//    list.tail = curr
+//  }
+//  
+//  if curr != nil {
+//    reverseLinkedListRecursive(list: list, prev: curr, curr: curr?.next)
+//    curr?.next = prev
+//  } else {
+//    list.head = prev
+//  }
 }
+
 
 
 reverseLinkedListRecursive(list:linkedList, prev: nil, curr: linkedList.head)
