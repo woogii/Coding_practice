@@ -447,8 +447,11 @@ func moveZeroes(_ nums: inout [Int]) {
   }
 }
 
+
 var zeroContainArr = [0,0,1,2]
+
 moveZeroes(&zeroContainArr)
+print(zeroContainArr)
 
 public class Interval {
   
