@@ -9,25 +9,34 @@ var str = "Hello, playground"
 
 func flattenArray(originArray:[Any])->[Int] {
   
-  let nestedArray = originArray
-  var subArray = [Int]()
-  var nestedSubArray = [Int]()
+  //var subArray = [Int]()
+  //var nestedSubArray = [Int]()
+  var flattenResultArray = [Int]()
   
-  for element in nestedArray {
+  for element in originArray {
+  
     print(element)
     
     if let value = element as? Int{
-      subArray.append(value)
+      flattenResultArray.append(value)
     } else {
-      nestedSubArray = flattenArray(originArray: element as! [Any])
+      
+      let recursionResult = flattenArray(originArray: element as! [Any])
+      
+      for num in recursionResult {
+        flattenResultArray.append(num)
+      }
     }
   }
 
-  return subArray + nestedSubArray
+  return flattenResultArray
 }
 
-//flattenArray(originArray: [1,[2,[3,4]]])
-//flattenArray(originArray: [1])
-//flattenArray(originArray: [1,[2]])
+flattenArray(originArray: [1,[2,[3,4]]])
+flattenArray(originArray: [1])
+flattenArray(originArray: [1,[2]])
 flattenArray(originArray: [1,[2,[3]]])
-flattenArray(originArray: [1,2,[3,[4,5]]])
+flattenArray(originArray: [[-1,0],1,2,[3,[4,5]]])
+flattenArray(originArray: [[-1,0],[1],2,[3,[4,5]]])
+flattenArray(originArray: [1,2,3,4,5,[6,7]])
+flattenArray(originArray: [[1,2],[3,4]])
