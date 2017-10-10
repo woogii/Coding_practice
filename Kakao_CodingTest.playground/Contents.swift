@@ -75,7 +75,7 @@ func printRuntime(cityList: [String], cacheSize: Int) -> Int {
               return $0.0.1.weight < $0.1.1.weight
             }
           })
-          cache.remove(at: 0)
+          cache.remove(at: 0)   // Remove least recently used
         }
         let newCityInfo = (0,i)
         cache.insert((city,newCityInfo), at: 0)
@@ -97,3 +97,86 @@ func printRuntime(cityList: [String], cacheSize: Int) -> Int {
 
 
 
+let dartSample1 = "1S2D*3T"
+let dartSample2 = "1D2S#10S"
+let dartSample3 = "1D2S0T"
+let dartSample4 = "1S*2T*3S"
+let dartSample5 = "1D#2S*3S"
+let dartSample6 = "1T2D3D#"
+let dartSample7 = "1D2S3T*"
+
+
+extension String {
+  subscript (r: Range<Int>) -> String {
+    let start = index(startIndex, offsetBy: r.lowerBound)
+    let end = index(startIndex, offsetBy: r.upperBound)
+    return self[start..<end]
+  }
+
+  subscript (r: ClosedRange<Int>) -> String {
+    let start = index(startIndex, offsetBy: r.lowerBound)
+    let end = index(startIndex, offsetBy: r.upperBound)
+    return self[start...end]
+  }
+}
+
+func createDartPoints(pointString: String) -> Int {
+
+  var currentString: String = ""
+  var currentValue = 0
+  var result = [0,0,0]
+  var resultIndex = 0
+  let bonus = "SDT"
+  let options = "*#"
+
+  for i in 0..<pointString.characters.count {
+
+    currentString = pointString[i...i]
+
+    if bonus.contains(currentString) {
+      if currentString == "S" {
+        result[resultIndex] = Int(pow((Double)(currentValue), 1))
+      } else if currentString == "D" {
+        result[resultIndex] = Int(pow((Double)(currentValue), 2))
+      } else {
+        result[resultIndex] = Int(pow((Double)(currentValue), 3))
+      }
+      resultIndex += 1
+    } else if options.contains(currentString) {
+      if currentString == "*" {
+        let currentResultIndex = resultIndex - 1
+        if currentResultIndex == 0 {
+          result[currentResultIndex] *= 2
+        } else {
+          let previousResultIndex = currentResultIndex - 1
+          result[previousResultIndex] *= 2
+          result[currentResultIndex] *= 2
+        }
+      } else {
+        result[resultIndex-1] *= -1
+      }
+    } else {
+      if currentString == "0"  {
+        if i >= 1 {
+          let previousString = pointString[i-1...i-1]
+          if previousString == "1" {
+            // check whether number is "10"
+            currentValue = Int(previousString + currentString)!
+            continue
+          }
+        }
+      }
+      currentValue = Int(currentString)!
+    }
+  }
+
+  return result.reduce(0, {$0+$1})
+}
+
+print(createDartPoints(pointString: dartSample1))
+print(createDartPoints(pointString: dartSample2))
+print(createDartPoints(pointString: dartSample3))
+print(createDartPoints(pointString: dartSample4))
+print(createDartPoints(pointString: dartSample5))
+print(createDartPoints(pointString: dartSample6))
+print(createDartPoints(pointString: dartSample7))
