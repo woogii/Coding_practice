@@ -105,6 +105,27 @@ let dartSample5 = "1D#2S*3S"
 let dartSample6 = "1T2D3D#"
 let dartSample7 = "1D2S3T*"
 
+dartSample1.components(separatedBy: "S")
+dartSample1.components(separatedBy: "D*")
+dartSample1.components(separatedBy: "T*")
+dartSample1.components(separatedBy: "T#")
+
+let s = "hey ho ha"
+let pattern = "(h).*(h).*(h)"
+// our goal is capture group 3, "h" in "ha"
+let regex = try! NSRegularExpression(pattern: pattern)
+let result = regex.matches(in:s, range:NSMakeRange(0, s.utf16.count))
+let third = result[0].rangeAt(3) // <-- !!
+third.location // 7
+third.length // 1
+
+//do {
+//  var regex2 = try NSRegularExpression(pattern: "[0...10]+(S,D,T)+(*,#)*")
+//  print(regex2.matches(in: dartSample1,range: NSMakeRange(0, dartSample1.utf16.count)))
+//} catch let error as NSError {
+//  print("\(error.userInfo)\(error.localizedDescription)")
+//}
+
 
 extension String {
   subscript (r: Range<Int>) -> String {
@@ -180,3 +201,93 @@ print(createDartPoints(pointString: dartSample4))
 print(createDartPoints(pointString: dartSample5))
 print(createDartPoints(pointString: dartSample6))
 print(createDartPoints(pointString: dartSample7))
+
+
+var test122 = "FRANCE+* "
+
+
+
+extension String {
+  func charAt(_ index:Int) -> Character {
+    return self[self.characters.index(self.characters.startIndex, offsetBy: index)]
+  }
+}
+let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func getStringArray(str:String) -> [String] {
+  var tokenStringArr = [String]()
+
+  for i in 0..<str.characters.count {
+    var tokenString:String?
+    if i < str.characters.count - 1 {
+      tokenString = String(str.charAt(i)).lowercased() + String(str.charAt(i+1)).lowercased()
+    }
+    guard let token = tokenString else { continue }
+    tokenStringArr.append(token)
+  }
+
+  return tokenStringArr.filter {
+    if $0.rangeOfCharacter(from: characterset.inverted) != nil {
+      return false
+    } else {
+      return true
+    }
+  }
+}
+
+func createDictBasedOn(strArr: [String]) -> [String:Int] {
+  var dict = [String: Int]()
+  for i in 0..<strArr.count {
+    dict[strArr[i]] = (dict[strArr[i]] ?? 0) + 1
+  }
+  return dict
+}
+
+func calcSimilarity(str1: String, str2: String) -> Int {
+  let multipliedVal = 65536
+  let str1Arr = getStringArray(str: str1)
+  let str2Arr = getStringArray(str: str2)
+  print(str1Arr)
+  print(str2Arr)
+  let str1Dict = createDictBasedOn(strArr: str1Arr)
+  let str2Dict = createDictBasedOn(strArr: str2Arr)
+  print(str1Dict)
+  print(str2Dict)
+  var unionDict = [String:Int]()
+  var interSectDict = [String:Int]()
+
+  for (str1Key, str1Value) in str1Dict {
+
+    for (str2Key, str2Value) in str2Dict {
+
+      if let str2Value = str2Dict[str1Key] {
+        if str2Value >= str1Value {
+          interSectDict[str1Key] = str1Value
+          unionDict[str1Key] = str2Value
+        } else {
+          interSectDict[str1Key] = str2Value
+          unionDict[str1Key] = str1Value
+        }
+      } else {
+        unionDict[str1Key] = str1Value
+        unionDict[str2Key] = str2Value
+      }
+    }
+  }
+
+  print(interSectDict)
+  print(unionDict)
+  if unionDict.count == 0 {
+    return multipliedVal
+  } else {
+    let value = (Float)(interSectDict.values.reduce(0, {$0+$1})) / Float(unionDict.values.reduce(0, {$0 + $1}))
+    return Int(value*65536.0)
+  }
+
+}
+
+calcSimilarity(str1:"FRANCE", str2: "FRENCH")
+calcSimilarity(str1:"handshake", str2: "shake hands")
+calcSimilarity(str1:"aa1+aa2", str2: "AAAA12")
+calcSimilarity(str1:"E=M*C^2", str2: "e=m*c^2")
+
