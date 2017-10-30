@@ -505,3 +505,22 @@ func merge(_ intervals:[Interval])->[Interval] {
 //
 //merge([Interval(1,3), Interval(4,7), Interval(6,12)])
 merge([Interval(1,4), Interval(0,4)])
+
+func maxSubArray(_ nums: [Int]) -> Int {
+  var dp = Array(repeating: 0, count: nums.count)
+  dp[0] = nums[0]
+  var maxValue = nums[0]
+
+  for i in 1..<nums.count {
+    dp[i] = dp[i-1] > 0 ? (dp[i-1] + nums[i]) : nums[i]
+    maxValue = max(dp[i], maxValue)
+  }
+
+  return maxValue
+}
+
+maxSubArray([-2,1,-3,4,-1,2,1,-5,4])
+
+
+
+

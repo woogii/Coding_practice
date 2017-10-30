@@ -286,8 +286,12 @@ func calcSimilarity(str1: String, str2: String) -> Int {
 
 }
 
-calcSimilarity(str1:"FRANCE", str2: "FRENCH")
-calcSimilarity(str1:"handshake", str2: "shake hands")
-calcSimilarity(str1:"aa1+aa2", str2: "AAAA12")
-calcSimilarity(str1:"E=M*C^2", str2: "e=m*c^2")
+//calcSimilarity(str1:"FRANCE", str2: "FRENCH")
+//calcSimilarity(str1:"handshake", str2: "shake hands")
+//calcSimilarity(str1:"aa1+aa2", str2: "AAAA12")
+//calcSimilarity(str1:"E=M*C^2", str2: "e=m*c^2")
+
+let charSet = CharacterSet()
+"test".rangeOfCharacter(from: CharacterSet.init(charactersIn:"t").inverted)
+
 
